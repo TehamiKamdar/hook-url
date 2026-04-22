@@ -1,30 +1,51 @@
-export const plans = [
-  {
-    name: "Starter",
-    price: "0",
-    period: "Free forever",
-    featured: false,
-    cta: "Get started",
-    ctaType: "outline",
-    features: ["1,000 clicks / month", "50 active links", "Basic click analytics", "Device tracking", "7-day data retention"],
-  },
-  {
-    name: "Pro",
-    price: "19",
-    period: "per month",
-    featured: true,
-    badge: "Most Popular",
-    cta: "Start Pro",
-    ctaType: "solid",
-    features: ["100,000 clicks / month", "Unlimited links", "Conversion tracking", "Custom branded domain", "UTM builder", "90-day data retention"],
-  },
-  {
-    name: "Business",
-    price: "59",
-    period: "per month",
-    featured: false,
-    cta: "Start Business",
-    ctaType: "outline",
-    features: ["Unlimited clicks", "Unlimited links", "All Pro features", "Team collaboration", "API access", "1-year data retention"],
-  },
-];
+export const getPlans = (billing) => [
+    {
+      name: "Creator",
+      price: billing === "monthly" ? 0 : 0,
+      period: billing === "monthly" ? "per month" : "per year",
+      features: [
+        "Short Links (limited)",
+        "Basic Analytics",
+        "Bio Link Page",
+        "QR Code Generator",
+        "UTM Builder",
+      ],
+      cta: "Start Free",
+      featured: false,
+    },
+    {
+      name: "Growth",
+      price: billing === "monthly" ? 9 : 90,
+      period:
+        billing === "monthly" ? "per month" : "per year (save ~20%)",
+      badge: "Most Popular",
+      featured: true,
+      features: [
+        "Unlimited Short Links",
+        "Advanced Analytics",
+        "Custom Domains",
+        "Link Expiry + Password Protection",
+        "Retargeting Pixels",
+        "A/B Testing",
+        "Priority Support",
+      ],
+      cta: "Upgrade to Growth",
+    },
+    {
+      name: "Agency",
+      price: billing === "monthly" ? 29 : 290,
+      period:
+        billing === "monthly" ? "per month" : "per year (save ~20%)",
+      features: [
+        "Everything in Growth",
+        "Team Members",
+        "API Access",
+        "Webhooks",
+        "Bulk Link Creation",
+        "White-label Branding",
+        "Dedicated Support",
+      ],
+      cta: "Go Agency",
+      featured: false,
+    },
+  ];

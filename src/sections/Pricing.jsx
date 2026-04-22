@@ -1,12 +1,16 @@
-import { plans } from "../constants/plans";
+import { useState } from "react";
+import { getPlans } from "../constants/plans";
 
 const Pricing = () => {
+  const [billing, setBilling] = useState("monthly");
+  const plans = getPlans(billing);
+
   return (
     <section id="pricing" className="py-24 px-6">
       <div className="max-w-5xl mx-auto text-center">
 
         {/* Header */}
-        <div className="mb-14">
+        <div className="mb-10">
 
           <div className="inline-flex items-center gap-2 text-xs font-medium text-blue-500 uppercase tracking-widest mb-4">
             <span className="w-5 h-px bg-blue-500" />
@@ -22,6 +26,33 @@ const Pricing = () => {
           </p>
         </div>
 
+        {/* Billing Toggle */}
+        <div className="flex items-center justify-center mb-12">
+          <div className="inline-flex p-1 rounded-lg bg-white/5 border border-white/10">
+
+            <button
+              onClick={() => setBilling("monthly")}
+              className={`px-4 py-1.5 text-sm rounded-md transition ${billing === "monthly"
+                  ? "bg-blue-500 text-white"
+                  : "text-zinc-400 hover:text-white"
+                }`}
+            >
+              Monthly
+            </button>
+
+            <button
+              onClick={() => setBilling("annually")}
+              className={`px-4 py-1.5 text-sm rounded-md transition ${billing === "annually"
+                  ? "bg-blue-500 text-white"
+                  : "text-zinc-400 hover:text-white"
+                }`}
+            >
+              Annually
+            </button>
+
+          </div>
+        </div>
+
         {/* Pricing Grid */}
         <div className="grid md:grid-cols-3 gap-4 text-left">
 
@@ -29,11 +60,10 @@ const Pricing = () => {
             <div
               key={p.name}
               className={`relative rounded-xl border p-6 transition
-            ${p.featured
+              ${p.featured
                   ? "border-blue-500/40 bg-[#111114] shadow-[0_0_40px_rgba(74,143,255,0.08)]"
                   : "border-white/10 bg-[#111114] hover:border-white/20"
-                }`
-              }
+                }`}
             >
 
               {/* Badge */}
@@ -43,14 +73,16 @@ const Pricing = () => {
                 </div>
               )}
 
-              {/* Plan name */}
+              {/* Plan Name */}
               <h3 className="font-syne font-semibold text-lg mb-2">
                 {p.name}
               </h3>
 
               {/* Price */}
               <div className="flex items-start gap-1 mb-1">
-                <sup className="text-sm font-syne text-blue-500 font-medium mt-2">$</sup>
+                <sup className="text-sm font-syne text-blue-500 font-medium mt-2">
+                  $
+                </sup>
                 <span className="text-4xl font-syne font-extrabold tracking-tight">
                   {p.price}
                 </span>
@@ -90,11 +122,10 @@ const Pricing = () => {
               <a
                 href="#"
                 className={`block mt-6 text-center px-4 py-2 rounded-lg text-sm font-medium transition
-              ${p.ctaType === "solid"
+                ${p.featured
                     ? "bg-blue-500 text-white hover:shadow-lg hover:shadow-blue-500/30"
                     : "border border-white/10 text-zinc-400 hover:text-white hover:border-white/20"
-                  }`
-                }
+                  }`}
               >
                 {p.cta}
               </a>
