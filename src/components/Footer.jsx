@@ -27,7 +27,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="text-xs text-zinc-500">
-          © 2025 HookURL
+          © 2026 HookURL
         </div>
 
       </div>
