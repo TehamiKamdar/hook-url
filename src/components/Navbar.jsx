@@ -1,13 +1,10 @@
+import logo from '../assets/images/logo.png';
+
 const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-5 border-b border-white/10 bg-[#0a0a0b]/80 backdrop-blur-lg">
       <a href="#" className="flex items-center gap-3">
-        <div className="w-8 h-8 bg-blue-500/10 border border-blue-500/30 rounded-lg flex items-center justify-center">
-          🔗
-        </div>
-        <span className="font-extrabold font-syne text-lg tracking-tight">
-          HookURL
-        </span>
+        <img src={logo} alt="HookURL Logo" className='h-10 object-contain' />
       </a>
 
       <div className="hidden md:flex items-center gap-8">
