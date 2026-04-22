@@ -1,3 +1,4 @@
+import logo from '../assets/images/logo.png';
 const Footer = () => {
   return (
     <footer className="border-t border-white/10 py-8 px-6">
@@ -5,9 +6,9 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
 
         {/* Brand */}
-        <div className="font-syne font-extrabold text-base tracking-tight text-white">
-          HookURL
-        </div>
+        <a href="#" className="flex items-center gap-3">
+          <img src={logo} alt="HookURL Logo" className='h-10 object-contain' />
+        </a>
 
         {/* Links */}
         <div className="flex flex-wrap justify-center gap-x-7 gap-y-2">

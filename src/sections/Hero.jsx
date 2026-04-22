@@ -9,7 +9,7 @@ const Hero = () => {
         Link Intelligence Platform
       </div>
 
-      <h1 className="font-syne font-extrabold text-4xl md:text-6xl leading-tight tracking-tight max-w-3xl">
+      <h1 className="font-sans font-extrabold text-4xl md:text-6xl leading-tight tracking-tight max-w-3xl">
         Every Link.<br />
         Every <span className="text-blue-500">Click.</span><br />
         Every Insight.
