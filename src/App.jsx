@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Main/Home";
 import MainLayout from "./layout/MainLayout";
+import Register from "./pages/Main/Register";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
             </MainLayout>
           }
         />
+        <Route path="/register" element={ <Register /> }></Route>
       </Routes>
     </BrowserRouter>
   );

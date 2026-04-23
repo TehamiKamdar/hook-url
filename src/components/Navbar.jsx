@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import logo from '../assets/images/logo.png';
 
 const Navbar = () => {
@@ -14,9 +15,7 @@ const Navbar = () => {
           </a>
         ))}
 
-        <a href="#" className="px-4 py-2 rounded-md bg-blue-500/10 border border-blue-500/30 text-blue-400 text-sm hover:bg-blue-500/20 transition">
-          Get Started
-        </a>
+        <Link to="/register" className="px-4 py-2 rounded-md bg-blue-500/10 border border-blue-500/30 text-blue-400 text-sm hover:bg-blue-500/20 transition">Get Started</Link>
       </div>
     </nav>
   )
