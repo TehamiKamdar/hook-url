@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import logo from '../assets/images/logo.png';
 
-const AuthLayout = ({ children, title, subtitle }) => {
+const AuthLayout = ({ children, title, subtitle, isLogin = false }) => {
   const perks = [
     {
       icon: <Link2 className="w-5 h-5" />,
@@ -65,10 +65,12 @@ const AuthLayout = ({ children, title, subtitle }) => {
                 {/* Hero Tagline */}
                 <div className="mb-12">
                   <h2 className="text-4xl font-bold text-white mb-4">
-                    Join the Future of Link Management
+                    {isLogin ? "Welcome Back!" : "Join the Future of Link Management"}
                   </h2>
                   <p className="text-gray-400 text-lg">
-                    Everything you need to create, track, and optimize your links in one powerful platform
+                    {isLogin
+                      ? "Track, optimize, and grow your audience with powerful link analytics"
+                      : "Everything you need to create, track, and optimize your links in one powerful platform"}
                   </p>
                 </div>
 
