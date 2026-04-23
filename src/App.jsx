@@ -1,28 +1,22 @@
-import Navbar from "./components/Navbar";
-import Hero from "./sections/Hero";
-import Features from "./sections/Features";
-import Pricing from "./sections/Pricing";
-import Footer from "./components/Footer";
-import Stats from "./sections/Stats";
-import CTA from "./sections/CTA";
-import './styles/global.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import MainLayout from "./layout/MainLayout";
 
-export default function App() {
+const App = () => {
   return (
-    <div className="min-h-screen bg-bg text-zinc-100 font-sans overflow-x-hidden hookurl-root">
-
-      <Navbar />
-
-      <main>
-        <Hero />
-        <Stats />
-        <Features />
-        <Pricing />
-        <CTA />
-      </main>
-
-      <Footer />
-
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <MainLayout>
+              <Home />
+            </MainLayout>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
+
+export default App;
