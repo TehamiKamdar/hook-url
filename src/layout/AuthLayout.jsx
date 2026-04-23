@@ -98,16 +98,16 @@ const AuthLayout = ({ children, title, subtitle }) => {
                 <div className="mt-12 pt-8 border-t border-gray-800">
                   <div className="grid grid-cols-3 gap-4">
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-white">10M+</div>
-                      <div className="text-xs text-gray-500">Links Created</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-white">50K+</div>
-                      <div className="text-xs text-gray-500">Happy Users</div>
+                      <div className="text-2xl font-bold text-white">50M+</div>
+                      <div className="text-xs text-gray-500">Links Tracking</div>
                     </div>
                     <div className="text-center">
                       <div className="text-2xl font-bold text-white">99.9%</div>
                       <div className="text-xs text-gray-500">Uptime</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-white">2ms</div>
+                      <div className="text-xs text-gray-500">Redirect Speed</div>
                     </div>
                   </div>
                 </div>
@@ -116,7 +116,7 @@ const AuthLayout = ({ children, title, subtitle }) => {
 
             {/* Footer Text */}
             <div className="text-xs text-gray-600">
-              © 2024 HookURL. All rights reserved.
+              © 2026 HookURL. All rights reserved.
             </div>
           </div>
         </div>
