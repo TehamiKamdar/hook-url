@@ -83,7 +83,7 @@ const Pricing = () => {
                 <sup className="text-sm font-syne text-blue-500 font-medium mt-2">
                   $
                 </sup>
-                <span className="text-4xl font-syne font-extrabold tracking-tight">
+                <span className="text-4xl font-sans font-extrabold tracking-tight">
                   {p.price}
                 </span>
               </div>
