@@ -128,12 +128,9 @@ const AuthLayout = ({ children, title, subtitle, isLogin = false }) => {
           <div className="w-full max-w-md">
             {/* Mobile Logo (visible only on mobile) */}
             <div className="lg:hidden text-center mb-8">
-              <div className="inline-flex items-center justify-center gap-2">
-                <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600">
-                  <Sparkles className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-xl font-bold text-white">HookURL</span>
-              </div>
+              <Link to="/" className="inline-flex items-center gap-3 group">
+                <img src={logo} alt="HookURL Logo" className='h-10 object-contain' />
+              </Link>
             </div>
 
             {/* Form Card */}
