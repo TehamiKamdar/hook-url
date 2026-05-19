@@ -46,7 +46,7 @@ export default function StatBlock({ num, suffix, desc }) {
     <div ref={ref} className="text-center">
 
       {/* Number */}
-      <div className="font-syne text-3xl md:text-5xl font-extrabold tracking-tight leading-none">
+      <div className="font-sans text-3xl md:text-5xl font-extrabold tracking-tight leading-none">
         {count}
         {suffix && (
           <span className="text-blue-500">
