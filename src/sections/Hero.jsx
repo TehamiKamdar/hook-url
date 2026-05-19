@@ -1,4 +1,108 @@
+import axios from "../api/axios";
+import { useEffect, useState } from "react";
+
 const Hero = () => {
+  const [loading, setLoading] = useState(false);
+  const [links, setLinks] = useState([]);
+  const [aliasStatus, setAliasStatus] = useState(null);
+
+  useEffect(() => {
+
+    const fetchLinks = async () => {
+
+      try {
+
+        const res = await axios.get("/");
+
+        const data = res.data;
+
+        if (data.status) {
+
+          setLinks(data.data);
+
+          console.log(data.owner_type);
+
+        }
+
+      } catch (err) {
+
+        console.error(err);
+
+      }
+
+    };
+
+    fetchLinks();
+
+  }, []);
+
+  const [form, setForm] = useState({
+    long_url: "",
+    alias: ""
+  });
+
+  const checkAlias = async (alias) => {
+
+    if (!alias.trim()) {
+      setAliasStatus(null);
+      return;
+    }
+
+    try {
+
+      const res = await fetch(
+        `http://localhost:8000/alias-check/${alias}`
+      );
+
+      const data = await res.json();
+
+      setAliasStatus(!data.exists);
+
+    } catch (err) {
+      console.error(err);
+    }
+
+  };
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async () => {
+    setLoading(true);
+
+    try {
+
+      await axios.get("/sanctum/csrf-cookie");
+
+      const res = await axios.post("/links", {
+        original_url: form.long_url,
+        custom_alias: form.alias,
+      });
+
+      const data = res.data;
+
+      if (data.status) {
+
+        setLinks((prev) => [data.data, ...prev]);
+
+        setForm({
+          long_url: "",
+          alias: ""
+        });
+
+      }
+
+    } catch (err) {
+      console.error(err);
+    }
+
+    setLoading(false);
+  };
+
   return (
     <section className="min-h-screen flex flex-col items-center justify-center text-center py-36 px-6 relative overflow-hidden">
 
@@ -32,6 +136,9 @@ const Hero = () => {
           <div className="md:col-span-7">
             <input
               type="text"
+              name="long_url"
+              value={form.long_url}
+              onChange={handleChange}
               placeholder="Paste your long URL here..."
               className="w-full h-12 px-4 rounded-xl bg-[#0a0a0b] border border-white/10 text-white placeholder:text-zinc-500 outline-none focus:border-blue-500 transition"
             />
@@ -41,38 +148,79 @@ const Hero = () => {
           <div className="md:col-span-3">
             <input
               type="text"
+              name="alias"
+              value={form.alias}
+              onChange={(e) => {
+                handleChange(e);
+                checkAlias(e.target.value);
+              }}
               placeholder="Custom alias"
               className="w-full h-12 px-4 rounded-xl bg-[#0a0a0b] border border-white/10 text-white placeholder:text-zinc-500 outline-none focus:border-blue-500 transition"
             />
+            {aliasStatus === false && (
+              <small className="text-red-500 text-sm mt-2">
+                Alias already taken
+              </small>
+            )}
           </div>
 
           {/* Button */}
           <div className="md:col-span-2">
-            <button className="w-full h-12 rounded-xl bg-blue-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/30 transition">
-              Shorten
+            <button
+              onClick={handleSubmit}
+              disabled={loading}
+              className="w-full h-12 rounded-xl bg-blue-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/30 transition">
+              {loading ? "Shortening..." : "Shorten"}
             </button>
           </div>
 
         </div>
 
         {/* Example Output */}
-        <div className="mt-4 p-4 rounded-xl bg-[#0a0a0b] border border-white/10 text-left">
+        {/* Generated Links */}
+        {links?.length > 0 && (
 
-          <p className="text-xs uppercase tracking-widest text-zinc-500 mb-2">
-            Your Short Link
-          </p>
+          <div className="mt-4 space-y-4">
 
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-            <span className="text-blue-400 font-medium break-all">
-              hookurl.io/launch2026
-            </span>
+            <div
+              className="p-4 rounded-xl bg-[#0a0a0b] border border-white/10 text-left"
+            >
 
-            <button className="px-4 py-2 text-sm rounded-lg border border-white/10 text-zinc-300 hover:text-white hover:border-white/20 transition">
-              Copy Link
-            </button>
+              <p className="text-xs uppercase tracking-widest text-zinc-500 mb-2">
+                Your Generated Short Links
+              </p>
+              {links.map((link) => {
+
+                const shortUrl =
+                  `${window.location.origin}/${link.custom_alias || link.short_code}`;
+
+                return (
+
+
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+
+                    <span className="text-blue-400 font-medium break-all">
+                      {shortUrl}
+                    </span>
+
+                    <button
+                      onClick={() => navigator.clipboard.writeText(shortUrl)}
+                      className="px-4 py-2 text-sm rounded-lg border border-white/10 text-zinc-300 hover:text-white hover:border-white/20 transition"
+                    >
+                      Copy Link
+                    </button>
+
+                  </div>
+
+
+                );
+
+              })}
+
+            </div>
           </div>
 
-        </div>
+        )}
 
       </div>
 
